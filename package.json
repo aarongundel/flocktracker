@@ -1,5 +1,5 @@
 {
-    "name": "flocker-1.0"
+    "name": "flock-tracker"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
