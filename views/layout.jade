@@ -1,6 +1,13 @@
 !!!
 html
-  head
+  append head
+    script(src="http://code.jquery.com/jquery-1.7.2.min.js")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    each file in req.customCss
+      link(rel='stylesheet', href=file)
+    //if lt IE 9    
+      each file in req.customIeCss
+        link(rel='stylesheet', href=file)
   body!= body
+  
