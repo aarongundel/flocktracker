@@ -31,7 +31,10 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 app.get('/flock/', routes.flock.index);
-app.get('/flock/create', routes.flock.create);
+app.get('/flock/:id', routes.flock.read);
+app.post('/flock/', routes.flock.create);
+app.put('/flock/', routes.flock.update);
+app.delete('/flock/', routes.flock.delete);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
