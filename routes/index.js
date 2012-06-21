@@ -2,6 +2,19 @@
 /*
  * GET home page.
  */
+var mongoose = require('mongoose'), 
+  Schema, ObjectId, Flock;
+
+mongoose.connect('mongodb://localhost/flock_tracker', function(err) { 
+    if (!err) { 
+      console.log('connected to MongoDB'); 
+    } else { 
+      throw err; 
+    } 
+}); 
+
+Schema = mongoose.Schema;
+ObjectId = Schema.ObjectId;
 
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });

@@ -1,13 +1,18 @@
-!!!
-html
+!! 
+html 
   append head
     script(src="http://code.jquery.com/jquery-1.7.2.min.js")
     title= title
+    link(rel='stylesheet', 
+    href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css') 
     link(rel='stylesheet', href='/stylesheets/style.css')
     each file in req.customCss
       link(rel='stylesheet', href=file)
     //if lt IE 9    
       each file in req.customIeCss
         link(rel='stylesheet', href=file)
-  body!= body
-  
+    link(rel='stylesheet', 
+href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.
+min.css') 
+  body 
+    section.container!= body 
