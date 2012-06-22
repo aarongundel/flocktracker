@@ -29,7 +29,7 @@ app.configure('production', function(){
 
 // Routes
 app.get('/', routes.index);
-app.get('/flocks/new', routes.flock.new);
+app.get('/flocks/new', routes.flock.newFlock);
 app.get('/flocks/:id/edit', routes.flock.edit);
 app.get('/flocks/:id', routes.flock.show);
 app.get('/flocks', routes.flock.index);
