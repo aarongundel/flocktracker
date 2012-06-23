@@ -39,12 +39,14 @@ exports.index = function (req, res) {
 };
 //var flocks = [{name: "Aaron's flock"}, {name: "Kron's flock"}]
 exports.flock = {};
+
 exports.flock.index = function (req, res) {
   //res.render('flock/index', {title: 'Flocks', flocks: []});
   Flock.find({}, function (err, docs) {
     res.render('flock/index', {title: 'Flocks', flocks: docs});
   });
 };
+
 exports.flock.newFlock = function (req, res) {
   req.customCss = ["/stylesheets/leaflet.css"];
   req.customIeCss = ["/stylesheets/leaflet.ie.css"];
@@ -52,6 +54,7 @@ exports.flock.newFlock = function (req, res) {
     title: 'Create a new Flock'
   });
 };
+
 exports.flock.create = function (req, res) {
   var location, flock;
   flock = new Flock();
@@ -69,3 +72,18 @@ exports.flock.create = function (req, res) {
     }
   });
 };
+
+exports.flock.edit = function (req, res) {
+  Flock.findById(req.params.id, function(err, doc) {
+    res.render('flocks/edit', {
+      title: 'Edit Flock Data',
+      flock: doc
+    })
+  });
+}
+
+exports.flock.update = function (req, res) {
+  Flock.findById(req.params.id, function (err, doc) {
+    doc.name = req.body.name;
+  });
+}

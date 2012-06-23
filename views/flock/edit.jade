@@ -1,0 +1,24 @@
+h1 Edit Flock
+form(method='post', action='flocks/' + flock.id)
+  input(name='_method', value='PUT', type='hidden')
+  fieldset
+    legend Editing Flock
+    div.clearfix
+      label Name
+      div.input
+        input(name='flock[name]', class='xlarge', value="#{flock.name}")
+    div.clearfix
+      label Organizer
+      div.input
+        input(name='flock[organizer]', class='xlarge', value="#{flock.organizer}")
+    div.clearfix
+      label Latitude
+      div.input
+        input(name='flock[latitude]', class='xlarge', value="#{flock.latitude}")
+    div.clearfix
+      label Longitude
+      div.input
+        input(name='flock[longitude]', class='xlarge', value="#{flock.longitude}")
+    div.actions
+      input(type='submit', value='Save', class='btn primary')
+      input(type='reset', class='btn', value="Cancel")

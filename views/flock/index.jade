@@ -1,0 +1,13 @@
+h1 Flocks
+- if(flocks.length)
+  table
+    tr
+      th Flocks
+        each flock in flocks
+          tr
+            td #{flock.name}
+            td #{flock.organizer}
+            td #{flock.shortID}
+            td #{flock.location}
+p
+  a(href='/flocks/new', class='btn primary') Add a Flock

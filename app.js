@@ -31,7 +31,7 @@ app.configure('production', function(){
 app.get('/', routes.index);
 app.get('/flocks/new', routes.flock.newFlock);
 app.get('/flocks/:id/edit', routes.flock.edit);
-app.get('/flocks/:id', routes.flock.show);
+//app.get('/flocks/:id', routes.flock.show);
 app.get('/flocks', routes.flock.index);
 app.post('/flocks', routes.flock.create);
 app.put('/flocks', routes.flock.update);
