@@ -6,13 +6,5 @@ html
     link(rel='stylesheet', 
     href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css') 
     link(rel='stylesheet', href='/stylesheets/style.css')
-    if req.customCss
-      each file in req.customCss
-        link(rel='stylesheet', href=file)
-    //if lt IE 9    
-      if req.customCss
-        each file in req.customIeCss
-          link(rel='stylesheet', href=file)
-    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css') 
   body 
     section.container!= body 

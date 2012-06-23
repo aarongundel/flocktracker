@@ -49,24 +49,23 @@ exports.flock.newFlock = function (req, res) {
   req.customCss = ["/stylesheets/leaflet.css"];
   req.customIeCss = ["/stylesheets/leaflet.ie.css"];
   res.render('flock/create', {
-    title: 'Create a new Flock',
-    req: req
+    title: 'Create a new Flock'
   });
 };
 exports.flock.create = function (req, res) {
   var location, flock;
-  flock = new Flock(
-    req.body.name,
-    req.body.organizer,
-    makeID(),
-    req.body.latitude,
-    req.body.longitude
-  );
+  flock = new Flock();
+  flock.name = req.body.name;
+  flock.organizer = req.body.organizer;
+  flock.shortID = makeID();
+  flock.latitutde = req.body.latitude;
+  flock.longitude = req.body.longitude;
+
   flock.save(function (err) {
     if (!err) {
-      res.redirect('/tasks');
+      res.redirect('/flocks');
     } else {
-      res.redirect('/tasks/new');
+      res.redirect('/flocks/new');
     }
   });
 };
