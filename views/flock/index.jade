@@ -1,4 +1,6 @@
 h1 Flocks
+p
+  a(href='/flocks/new', class='btn primary') Add a Flock
 - if(flocks.length)
   table
     tr
@@ -9,5 +11,7 @@ h1 Flocks
             td #{flock.organizer}
             td #{flock.shortID}
             td #{flock.location}
-p
-  a(href='/flocks/new', class='btn primary') Add a Flock
+            td
+              a(href="/flocks/#{flock.id}/edit") Edit
+- else
+  p There are no flocks created yet. :(

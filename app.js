@@ -3,14 +3,14 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes');
+var express = require('express'),
+  routes = require('./routes');
 
 var app = module.exports = express.createServer();
 
 // Configuration
 
-app.configure(function(){
+app.configure(function () {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
@@ -19,11 +19,11 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-app.configure('development', function(){
+app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.configure('production', function(){
+app.configure('production', function () {
   app.use(express.errorHandler());
 });
 
@@ -31,12 +31,11 @@ app.configure('production', function(){
 app.get('/', routes.index);
 app.get('/flocks/new', routes.flock.newFlock);
 app.get('/flocks/:id/edit', routes.flock.edit);
-//app.get('/flocks/:id', routes.flock.show);
+app.put('/flocks/:id', routes.flock.update);
 app.get('/flocks', routes.flock.index);
 app.post('/flocks', routes.flock.create);
-app.put('/flocks', routes.flock.update);
-app.delete('/flocks', routes.flock.delete);
+app.delete('/flocks/:id', routes.flock.delete);
 
-app.listen(3000, function(){
+app.listen(3000, function () {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });

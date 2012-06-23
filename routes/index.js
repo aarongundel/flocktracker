@@ -74,16 +74,26 @@ exports.flock.create = function (req, res) {
 };
 
 exports.flock.edit = function (req, res) {
-  Flock.findById(req.params.id, function(err, doc) {
-    res.render('flocks/edit', {
+  Flock.findById(req.params.id, function (err, doc) {
+    res.render('flock/edit', {
       title: 'Edit Flock Data',
       flock: doc
-    })
+    });
   });
-}
+};
 
 exports.flock.update = function (req, res) {
   Flock.findById(req.params.id, function (err, doc) {
-    doc.name = req.body.name;
+    doc.name = req.body.flock.name;
+    doc.organizer = req.body.flock.organizer;
+    doc.latitude = req.body.flock.latitude;
+    doc.longitude = req.body.flock.longitude;
+    flock.save(function (err) {
+      if (!err) {
+        res.redirect('/flocks');
+      } else {
+        res.redirect('/flocks/' + req.params.id + '/edit');
+      }
+    });
   });
-}
+};
