@@ -4,11 +4,11 @@
  */
 
 var express = require('express'),
+  app = module.exports = express.createServer(),
   routes = require('./routes'),
   Twitter = require('ntwitter'), 
+  io = require('socket.io').listen(app),
   twit;
-
-var app = module.exports = express.createServer();
 
 // Configuration
 
@@ -52,9 +52,12 @@ twit = new Twitter({
 });
 
 twit.stream('statuses/filter', {
-  track: ['#flocking']
+  track: ['#love']
 }, function (stream) {
   stream.on('data', function (data) {
-    console.log(data);
+    io.sockets.volatile.emit('tweet', {
+      user: data.user.screen_name,
+      text: data.text
+    });
   });
 });

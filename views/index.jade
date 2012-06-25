@@ -4,3 +4,13 @@ p Are we having fun yet?
 h3 No.
 h2 why not?
 h1 because.
+ul.tweets
+script(src="/socket.io/socket.io.js")
+script
+  var socket = io.connect();
+  $(document).ready(function () {
+    var tweetList = $("ul.tweets");
+    socket.on('tweet', function (data) {
+      tweetList.prepend($("<li>").text(data.user + ": " + data.text));
+    })
+  });
