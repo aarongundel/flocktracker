@@ -84,10 +84,12 @@ exports.flock.edit = function (req, res) {
 
 exports.flock.update = function (req, res) {
   Flock.findById(req.params.id, function (err, doc) {
-    doc.name = req.body.flock.name;
-    doc.organizer = req.body.flock.organizer;
-    doc.latitude = req.body.flock.latitude;
-    doc.longitude = req.body.flock.longitude;
+    var flock = doc;
+
+    flock.name = req.body.flock.name;
+    flock.organizer = req.body.flock.organizer;
+    flock.latitude = req.body.flock.latitude;
+    flock.longitude = req.body.flock.longitude;
     flock.save(function (err) {
       if (!err) {
         res.redirect('/flocks');
