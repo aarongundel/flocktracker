@@ -4,7 +4,12 @@ p
 - if(flocks.length)
   table
     tr
-      th Flocks
+      th Name
+      th Organizer
+      th ID
+      th Location
+      th Edit
+      th Delete
         each flock in flocks
           tr
             td #{flock.name}
@@ -13,5 +18,9 @@ p
             td #{flock.location}
             td
               a(href="/flocks/#{flock.id}/edit") Edit
+            td
+              form(method='post', action='flocks/' + flock.id)
+                input(name='_method', value='DELETE', type='hidden')
+                button(type='submit') Delete
 - else
   p There are no flocks created yet. :(

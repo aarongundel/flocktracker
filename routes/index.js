@@ -99,3 +99,14 @@ exports.flock.update = function (req, res) {
     });
   });
 };
+
+exports.flock.delete = function (req, res) {
+  Flock.findById(req.params.id, function (err, doc) {
+    if (!doc) {
+      return next(new NotFound('Document not found'));
+    }
+    doc.remove(function () {
+      res.redirect('/flocks');
+    });
+  });
+};

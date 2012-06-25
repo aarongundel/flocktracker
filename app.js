@@ -29,12 +29,12 @@ app.configure('production', function () {
 
 // Routes
 app.get('/', routes.index);
+app.get('/flocks', routes.flock.index);
+app.post('/flocks', routes.flock.create);
 app.get('/flocks/new', routes.flock.newFlock);
 app.get('/flocks/:id/edit', routes.flock.edit);
 app.put('/flocks/:id', routes.flock.update);
-app.get('/flocks', routes.flock.index);
-app.post('/flocks', routes.flock.create);
-app.delete('/flocks/:id', routes.flock.delete);
+app.del('/flocks/:id', routes.flock.delete);
 
 app.listen(3000, function () {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
