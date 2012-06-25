@@ -1,4 +1,7 @@
 h1 Edit Flock
+-if(typeof flash != 'undefined')
+  include ../mixins/flash-messages
+  mixin flash-messages(flash)
 form(method='post', action='/flocks/' + flock.id)
   input(name='_method', value='PUT', type='hidden')
   fieldset
@@ -14,11 +17,11 @@ form(method='post', action='/flocks/' + flock.id)
     div.clearfix
       label Latitude
       div.input
-        input(name='flock[latitude]', class='xlarge', value="#{flock.latitude}")
+        input(name='flock[latitude]', class='xlarge', value="#{flock.location.lat}")
     div.clearfix
       label Longitude
       div.input
-        input(name='flock[longitude]', class='xlarge', value="#{flock.longitude}")
+        input(name='flock[longitude]', class='xlarge', value="#{flock.location.lon}")
     div.actions
       input(type='submit', value='Save', class='btn primary')
       input(type='reset', class='btn', value="Cancel")

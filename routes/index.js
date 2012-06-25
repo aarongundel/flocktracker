@@ -28,14 +28,18 @@ Flock = new Schema({
   name: String,
   organizer: String,
   shortID: String,
-  latitude: Number,
-  longitude: Number
+  location: {
+    lon: Number,
+    lat: Number
+  }
 });
+
+Flock.index({ location:'2d' });
 
 Flock = mongoose.model('Flock', Flock);
 
 exports.index = function (req, res) {
-  res.render('index', {title: 'Express', req: req});
+  res.render('index', { title: 'Express', req: req });
 };
 //var flocks = [{name: "Aaron's flock"}, {name: "Kron's flock"}]
 exports.flock = {};
@@ -43,7 +47,7 @@ exports.flock = {};
 exports.flock.index = function (req, res) {
   //res.render('flock/index', {title: 'Flocks', flocks: []});
   Flock.find({}, function (err, docs) {
-    res.render('flock/index', {title: 'Flocks', flocks: docs});
+    res.render('flock/index', { title: 'Flocks', flocks: docs });
   });
 };
 
@@ -58,16 +62,20 @@ exports.flock.newFlock = function (req, res) {
 exports.flock.create = function (req, res) {
   var location, flock;
   flock = new Flock();
-  flock.name = req.body.name;
-  flock.organizer = req.body.organizer;
+  flock.name = req.body.flock.name;
+  flock.organizer = req.body.flock.organizer;
   flock.shortID = makeID();
-  flock.latitutde = req.body.latitude;
-  flock.longitude = req.body.longitude;
+  flock.location = {
+    lon: req.body.flock.longitude,
+    lat: req.body.flock.latitude
+  };
 
   flock.save(function (err) {
     if (!err) {
+      req.flash('info', 'Flock created');
       res.redirect('/flocks');
     } else {
+      req.flash('warning', 'Could not create the flock; try again');
       res.redirect('/flocks/new');
     }
   });
@@ -88,12 +96,16 @@ exports.flock.update = function (req, res) {
 
     flock.name = req.body.flock.name;
     flock.organizer = req.body.flock.organizer;
-    flock.latitude = req.body.flock.latitude;
-    flock.longitude = req.body.flock.longitude;
+    flock.location = {
+      lon: req.body.flock.longitude,
+      lat: req.body.flock.latitude
+    };
     flock.save(function (err) {
       if (!err) {
+        req.flash('info', 'Flock updated');
         res.redirect('/flocks');
       } else {
+        req.flash('warning', 'Could not update the flock; try again');
         res.redirect('/flocks/' + req.params.id + '/edit');
       }
     });
@@ -106,6 +118,7 @@ exports.flock.delete = function (req, res) {
       return next(new NotFound('Document not found'));
     }
     doc.remove(function () {
+      req.flash('info', 'Deleted the flock');
       res.redirect('/flocks');
     });
   });

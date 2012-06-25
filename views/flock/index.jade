@@ -1,3 +1,6 @@
+-if(typeof flash != 'undefined')
+  include ../mixins/flash-messages
+  mixin flash-messages(flash)
 h1 Flocks
 p
   a(href='/flocks/new', class='btn primary') Add a Flock
@@ -15,7 +18,7 @@ p
             td #{flock.name}
             td #{flock.organizer}
             td #{flock.shortID}
-            td #{flock.location}
+            td #{flock.location.lat}, #{flock.location.lon} 
             td
               a(href="/flocks/#{flock.id}/edit") Edit
             td

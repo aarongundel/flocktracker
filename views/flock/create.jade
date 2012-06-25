@@ -1,23 +1,26 @@
 h1 Create a Flock
+-if(typeof flash != 'undefined')
+  include ../mixins/flash-messages
+  mixin flash-messages(flash)
 form(method='post', action='/flocks')
   fieldset
     legend Add a Flock
     div.clearfix
       label Flock Name
       div.input
-        input(name='name', class='xlarge')
+        input(name='flock[name]', class='xlarge')
     div.clearfix
       label Organizer Name
       div.input
-        input(name='organizer', class='xlarge')
+        input(name='flock[organizer]', class='xlarge')
     div.clearfix
       label Latitude
       div.input
-        input(name='latitude', class='xlarge')
+        input(name='flock[latitude]', class='xlarge')
     div.clearfix
       label Longitude
       div.input
-        input(name='longitude', class='xlarge')
+        input(name='flock[longitude]', class='xlarge')
     div.actions
       input(type='submit', value='Save', class='btn primary')
       input(type='reset', class='btn', value="Cancel")
